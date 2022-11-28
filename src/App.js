@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
-import pokemon from './pokemon.json';
+//import pokemon from '../public/pokemon.json';// Module not found: Error: You attempted to import ../public/pokemon.json which falls outside of the project src/ directory. Relative imports outside of src/ are not supported.
+//You can either move it inside src/, or add a symlink to it from project's node_modules/.
 
 const PokemonRow = ({cadapokemon, siSelecciono}) => (
   <tr>
@@ -56,7 +57,14 @@ PokemonInfo.propTypes = {
 
 function App() {
   const [filter, filterSet] = React.useState("");
+  const [pokemon, pokemonSet] = React.useState([]);
   const [selectedItem, selectedItemSet] = React.useState("");
+
+  React.useEffect(() => {
+    fetch("http://localhost:3000/01_starting_react/pokemon.json")
+      .then((resp) => resp.json())
+      .then((data) => pokemonSet(data));
+  }, []); //puesto que el elemento monitoreado es vacio este proceso se ejecuta la primera vez que se ejecuta el codigo y luego ignora cualquier cambio 
 
   const divStyle = { // el estilo 
     margin: "auto",
