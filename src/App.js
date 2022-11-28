@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 
 import './App.css';
 //import pokemon from '../public/pokemon.json';// Module not found: Error: You attempted to import ../public/pokemon.json which falls outside of the project src/ directory. Relative imports outside of src/ are not supported.
@@ -11,7 +13,7 @@ const PokemonRow = ({cadapokemon, siSelecciono}) => (
     <td>{cadapokemon.name.english}</td>
     <td>{cadapokemon.type.join(', ')}</td>
     <td>
-      <button onClick={() => siSelecciono(cadapokemon)}>Seleccionar</button>
+      <Button variant="contained" color="secondary" endIcon={<SendIcon />} onClick={() => siSelecciono(cadapokemon)}>Ver</Button>
     </td>
   </tr>
 )
@@ -112,7 +114,6 @@ function App() {
           ))}
         </tbody>
       </table>
-
         </div>
         {selectedItem && <PokemonInfo {...selectedItem}/>}
       </TwoColumnLayout>
