@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import pokemon from './pokemon.json';
 
 function App() {
 
@@ -20,10 +21,12 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>NombrePokemon</td>
-            <td>Poderes, muchos</td>
+          {pokemon.slice(0,25).map(cadapokemon => ( 
+          <tr key={cadapokemon.id}>
+              <td>{cadapokemon.name.english}</td>
+              <td>{cadapokemon.type.join(', ')}</td>
           </tr>
+          ))}
         </tbody>
       </table>
     </div>
