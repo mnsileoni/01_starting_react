@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
+
 import './App.css';
 //import pokemon from '../public/pokemon.json';// Module not found: Error: You attempted to import ../public/pokemon.json which falls outside of the project src/ directory. Relative imports outside of src/ are not supported.
 //You can either move it inside src/, or add a symlink to it from project's node_modules/.
@@ -55,6 +57,28 @@ PokemonInfo.propTypes = {
   }).isRequired,
 };
 
+const Title = styled.h1`
+  text-align: center;
+`;
+
+const TwoColumnLayout = styled.div`
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-column-gap: 1rem;
+`;
+
+const Container = styled.div`
+  margin: auto;
+  width: 600px;
+  padding-top: 0rem;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  font-size: x-large;
+  padding: 0.2rem;
+`;
+
 function App() {
   const [filter, filterSet] = React.useState("");
   const [pokemon, pokemonSet] = React.useState([]);
@@ -66,23 +90,12 @@ function App() {
       .then((data) => pokemonSet(data));
   }, []); //puesto que el elemento monitoreado es vacio este proceso se ejecuta la primera vez que se ejecuta el codigo y luego ignora cualquier cambio 
 
-  const divStyle = { // el estilo 
-    margin: "auto",
-    width: 800,
-    paddingTop: "1rem",
-  };
-
   return (
-    <div  style={divStyle}>
-      <h1 className="title">Pokemon Search</h1>
-
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "70% 30%",
-        gridColumnGap: '1rem',
-      }}>
+    <Container>
+      <Title>Pokemon Search</Title>
+      <TwoColumnLayout>
         <div>
-      <input
+      <Input
         type="text"
         value={filter}
             onChange={(evento) => filterSet(evento.target.value)} />
@@ -102,8 +115,8 @@ function App() {
 
         </div>
         {selectedItem && <PokemonInfo {...selectedItem}/>}
-      </div>
-    </div>
+      </TwoColumnLayout>
+    </Container>
   );
 }
 
