@@ -1,20 +1,23 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import useStore from "../store";
+
 import PokemonType from "../PokemonType";
 
 const PokemonInfo = () => {
-  const selectedItem = useSelector((state) => state.selectedItem);
+  const selectedPokemon = useStore((state) => state.selectedPokemon);
 
-  return selectedItem ? (
+  return selectedPokemon ? (
     <div>
-      <h1>{selectedItem.name.english}</h1>
+      <h2>{selectedPokemon.name.english}</h2>
       <table>
-        {Object.keys(selectedItem.base).map((clave) => (
-          <tr key={clave}>
-            <td>{clave}</td>
-            <td>{selectedItem.base[clave]}</td>
-          </tr>
-        ))}
+        <tbody>
+          {Object.keys(selectedPokemon.base).map((clave) => (
+            <tr key={clave}>
+              <td>{clave}</td>
+              <td>{selectedPokemon.base[clave]}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   ) : null;
